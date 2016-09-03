@@ -10,12 +10,8 @@ var url = "https://www.cars.com/for-sale/searchresults.action?zc=85202&rd=99999&
 page.open(url, function(status) {
     if (status === "success") {
         window.setTimeout(function () {
-          page.includeJs("http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js", function() {
-              page.evaluate(function() {
-                  console.log("$(\".explanation\").text() -> " + $(".cui-delta listing-row__title").html());
-              });
-              phantom.exit(0);
-          });
+          console.log(page.content);
+          phantom.exit(0);
       }, 1000);
     } else {
       console.log('Unable to load the address!');
