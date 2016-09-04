@@ -37,4 +37,23 @@ class SearchCars extends Command {
         });
     }
 
+    public function webdriver_test()
+    {
+      // https://github.com/yatnosudar/PHP-WebDriver-Phantomjs-Selenium/blob/master/example.php
+      // start Firefox
+      $host = 'http://localhost:4444/wd/hub'; // this is the default
+      $capabilities = array(
+      	WebDriverCapabilityType::BROWSER_NAME => 'phantomjs',
+      	WebDriverCapabilityType::ACCEPT_SSL_CERTS=> true,
+      	WebDriverCapabilityType::JAVASCRIPT_ENABLED=>true);
+      $driver = new RemoteWebDriver($host, $capabilities);
+      // navigate to 'http://docs.seleniumhq.org/'
+      $session = $driver->get($searchstring1);
+      // Search 'php' in the search box
+      $from = $driver->findElement(WebDriverBy::cssSelector(
+      	'h2.cui-delta.listing-row__title'));
+      $from->click();
+
+    }
+
 }
