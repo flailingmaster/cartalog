@@ -3,6 +3,9 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use Goutte\Client;
+use Facebook\WebDriver\Remote\DesiredCapabilities;
+use Facebook\WebDriver\Remote\RemoteWebDriver;
+use Facebook\WebDriver\Remote\WebDriverCapabilityType;
 class SearchCars extends Command {
 
     /**
@@ -29,15 +32,16 @@ class SearchCars extends Command {
     public function handle()
     {
         $this->info('it works!');
-        $client = new Client();
+        $this->webdriver_test($this->searchstring1);
+        /*$client = new Client();
         $crawler = $client->request('GET', $this->searchstring2);
         $crawler->filter('body')->each(function ($node) {
           $text = print_r($node, TRUE);
           $this->info("$text \n");
-        });
+        });*/
     }
 
-    public function webdriver_test()
+    public function webdriver_test($url)
     {
       // https://github.com/yatnosudar/PHP-WebDriver-Phantomjs-Selenium/blob/master/example.php
       // start Firefox
@@ -46,14 +50,25 @@ class SearchCars extends Command {
       	WebDriverCapabilityType::BROWSER_NAME => 'phantomjs',
       	WebDriverCapabilityType::ACCEPT_SSL_CERTS=> true,
       	WebDriverCapabilityType::JAVASCRIPT_ENABLED=>true);
+      $desired_capabilities = DesiredCapabilities::firefox();
+      $desired_capabilities->setCapability('acceptSslCerts', false);
+      $desired_capabilities->setCapability('javascriptEnabled', true);
+      $driver = RemoteWebDriver::create($host, $desired_capabilities);
       $driver = new RemoteWebDriver($host, $capabilities);
       // navigate to 'http://docs.seleniumhq.org/'
-      $session = $driver->get($searchstring1);
+      $session = $driver->get($url);
       // Search 'php' in the search box
       $from = $driver->findElement(WebDriverBy::cssSelector(
       	'h2.cui-delta.listing-row__title'));
       $from->click();
+/*
+      $driver = RemoteWebDriver::create($host, DesiredCapabilities::firefox());
 
+      $driver->get('http://google.com');
+      $element = $driver->findElement(WebDriverBy::name('q'));
+      $element->sendKeys('Cheese');
+      $element->submit();
+*/
     }
 
 }
