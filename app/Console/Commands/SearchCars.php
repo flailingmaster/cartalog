@@ -6,6 +6,8 @@ use Goutte\Client;
 use Facebook\WebDriver\Remote\DesiredCapabilities;
 use Facebook\WebDriver\Remote\RemoteWebDriver;
 use Facebook\WebDriver\Remote\WebDriverCapabilityType;
+use Facebook\WebDriver\WebDriverBy;
+
 class SearchCars extends Command {
 
     /**
@@ -32,7 +34,17 @@ class SearchCars extends Command {
     public function handle()
     {
         $this->info('it works!');
-        $this->webdriver_test($this->searchstring1);
+        $driver = RemoteWebDriver::create("http://localhost:9515", DesiredCapabilities::chrome(), 90 * 1000, 90 * 1000);
+        $driver->get($this->searchstring1);
+        $from = $driver->findElements(WebDriverBy::cssSelector(
+          'div.listing-row__details'));
+        foreach ($from as $row) {
+          $title = $row->getText();
+          $this->info($title);
+        }
+
+        //$element = $this->webdriver_test($this->searchstring1);
+        //$this->info($element->getText());
         /*$client = new Client();
         $crawler = $client->request('GET', $this->searchstring2);
         $crawler->filter('body')->each(function ($node) {
@@ -45,7 +57,8 @@ class SearchCars extends Command {
     {
       // https://github.com/yatnosudar/PHP-WebDriver-Phantomjs-Selenium/blob/master/example.php
       // start Firefox
-      $host = 'http://localhost:4444/wd/hub'; // this is the default
+      $host = 'http://127.0.0.1:4444/wd/hub'; // this is the default
+      /*
       $capabilities = array(
       	WebDriverCapabilityType::BROWSER_NAME => 'phantomjs',
       	WebDriverCapabilityType::ACCEPT_SSL_CERTS=> true,
@@ -53,7 +66,7 @@ class SearchCars extends Command {
       $desired_capabilities = DesiredCapabilities::firefox();
       $desired_capabilities->setCapability('acceptSslCerts', false);
       $desired_capabilities->setCapability('javascriptEnabled', true);
-      $driver = RemoteWebDriver::create($host, $desired_capabilities);
+      $driver = RemoteWebDriver::create($host, $desired_capabilities, 90 * 1000, 90 * 1000 );
       $driver = new RemoteWebDriver($host, $capabilities);
       // navigate to 'http://docs.seleniumhq.org/'
       $session = $driver->get($url);
@@ -61,14 +74,25 @@ class SearchCars extends Command {
       $from = $driver->findElement(WebDriverBy::cssSelector(
       	'h2.cui-delta.listing-row__title'));
       $from->click();
-/*
-      $driver = RemoteWebDriver::create($host, DesiredCapabilities::firefox());
-
-      $driver->get('http://google.com');
-      $element = $driver->findElement(WebDriverBy::name('q'));
-      $element->sendKeys('Cheese');
-      $element->submit();
 */
+
+
+//      $driver = RemoteWebDriver::create($host, DesiredCapabilities::firefox(), 90 * 1000, 90 * 1000);
+/*
+      $driver->get($url);
+      $from = $driver->findElement(WebDriverBy::cssSelector(
+        'h2.cui-delta.listing-row__title'));
+      return $from;
+*/
+      $driver = RemoteWebDriver::create("http://localhost:9515", DesiredCapabilities::chrome(), 90 * 1000, 90 * 1000);
+      $driver->get($url);
+      $from = $driver->findElements(WebDriverBy::cssSelector(
+        'listing-row__details'));
+      return $from;
+      //$element = $driver->findElement(WebDriverBy::name('q'));
+      //$element->sendKeys('Cheese');
+      //$element->submit();
+//*/
     }
 
 }
