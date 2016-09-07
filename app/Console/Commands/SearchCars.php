@@ -39,8 +39,18 @@ class SearchCars extends Command {
         $from = $driver->findElements(WebDriverBy::cssSelector(
           'div.listing-row__details'));
         foreach ($from as $row) {
-          $title = $row->getText();
-          $this->info($title);
+          $title = $row->findElement(WebDriverBy::cssSelector(
+          	'h2.cui-delta.listing-row__title'));
+          $price = $row->findElement(WebDriverBy::cssSelector(
+            'span.listing-row__price'));
+          $mileage = $row->findElement(WebDriverBy::cssSelector(
+            'span.listing-row__mileage'));
+          //mileage: listing-row__mileage
+
+
+          $this->info("title:".$title->getText());
+          $this->info("price:".$price->getText());
+          $this->info("mileage:".$mileage->getText());
         }
 
         //$element = $this->webdriver_test($this->searchstring1);
