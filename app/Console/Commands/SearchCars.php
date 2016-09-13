@@ -7,6 +7,7 @@ use Facebook\WebDriver\Remote\DesiredCapabilities;
 use Facebook\WebDriver\Remote\RemoteWebDriver;
 use Facebook\WebDriver\Remote\WebDriverCapabilityType;
 use Facebook\WebDriver\WebDriverBy;
+use Facebook\WebDriver\WebDriverKeys;
 
 class SearchCars extends Command {
 
@@ -53,7 +54,11 @@ class SearchCars extends Command {
         $this->info("in next page for loop");
         $test = $next->findElements(WebDriverBy::cssSelector('a'));
         foreach ($test as $links) {
-         $this->info($links->getText());  
+         $this->info($links->getText());
+         if ($links->getText() != '1') {
+           $next = $links->click();
+         }
+         //$links->getKeyboard()->sendKeys(WebDriverKeys.CONTROL,'t');
         }
 
       }
