@@ -50,6 +50,8 @@ class SearchCars extends Command {
       $cars = $this->parse_page($driver);
       $nextpage = $driver->findElement(WebDriverBy::cssSelector(
           'cui-page-button a.next-page'))->click();
+      $nextcars = $this->parse_page($nextpage);
+      $this->table(["title", "price", "mileage"], $nextcars);
       $cars = array_merge($cars, $this->parse_page($nextpage));
 
       return $cars;
