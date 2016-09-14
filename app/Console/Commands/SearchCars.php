@@ -47,22 +47,11 @@ class SearchCars extends Command {
 
       $driver = RemoteWebDriver::create("http://localhost:9515", DesiredCapabilities::chrome(), 90 * 1000, 90 * 1000);
       $driver->get($url);
-      $nextpages = $driver->findElements(WebDriverBy::cssSelector(
-        'ul.page-list'));
-      $this->info("next page for loop");
-      foreach ($nextpages as $next) {
-        $this->info("in next page for loop");
-        $test = $next->findElements(WebDriverBy::cssSelector('a'));
-        foreach ($test as $links) {
-         $this->info($links->getText());
-         if ($links->getText() != '1') {
-           $next = $links->click();
-         }
-         //$links->getKeyboard()->sendKeys(WebDriverKeys.CONTROL,'t');
-        }
-
-      }
       $cars = $this->parse_page($driver);
+      $nextpage = $driver->findElement(WebDriverBy::cssSelector(
+          'cui-page-button a.next-page'))->click();
+      $cars = array_merge($cars, $this->parse_page($nextpage));
+
       return $cars;
 
 
