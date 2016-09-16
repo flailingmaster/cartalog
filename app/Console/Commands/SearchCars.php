@@ -39,7 +39,7 @@ class SearchCars extends Command {
         $this->info('it works!');
         //$cars = $this->webdriver_test($this->searchstring1);
         $cars = $this->webdriver_test($this->caymans);
-        $this->table(["title", "price", "mileage"], $cars);
+        $this->table(["title", "price", "mileage", "meta"], $cars);
     }
 
     public function webdriver_test($url)
@@ -74,8 +74,9 @@ class SearchCars extends Command {
           'span.listing-row__price'));
         $mileage = $row->findElement(WebDriverBy::cssSelector(
           'span.listing-row__mileage'));
-
-        $cars[] = [$title->getText(), $price->getText(), $mileage->getText()];
+        $meta = $row->findElement(WebDriverBy::cssSelector(
+          'div.listing-row__meta'));
+        $cars[] = [$title->getText(), $price->getText(), $mileage->getText(), $meta->getText()];
       }
       return $cars;
     }
