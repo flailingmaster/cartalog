@@ -39,7 +39,7 @@ class SearchCars extends Command {
         $this->info('it works!');
         //$cars = $this->webdriver_test($this->searchstring1);
         $cars = $this->webdriver_test($this->caymans);
-        $this->table(["title", "price", "mileage", "meta"], $cars);
+        $this->table(["title", "price", "mileage", "meta", "link"], $cars);
     }
 
     public function webdriver_test($url)
@@ -70,13 +70,15 @@ class SearchCars extends Command {
       foreach ($from as $row) {
         $title = $row->findElement(WebDriverBy::cssSelector(
           'h2.cui-delta.listing-row__title'));
+        $link = $title->findElement(WebDriverBy::cssSelector(
+          'a'));
         $price = $row->findElement(WebDriverBy::cssSelector(
           'span.listing-row__price'));
         $mileage = $row->findElement(WebDriverBy::cssSelector(
           'span.listing-row__mileage'));
         $meta = $row->findElement(WebDriverBy::cssSelector(
           'div.listing-row__meta'));
-        $cars[] = [$title->getText(), $price->getText(), $mileage->getText(), $meta->getText()];
+        $cars[] = [$title->getText(), $price->getText(), $mileage->getText(), $meta->getText(), $link->getAttribute('href')];
       }
       return $cars;
     }
