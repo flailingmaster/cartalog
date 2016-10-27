@@ -16,7 +16,8 @@ class SearchCars extends Command {
      *
      * @var string
      */
-    protected $name = 'search:cars {--type=cayman}';
+    protected $name = 'search:cars';
+    protected $signature = 'search:cars {--type=cayman}';
 
     /**
      * The console command description.
