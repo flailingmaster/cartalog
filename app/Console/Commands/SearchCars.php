@@ -24,11 +24,15 @@ class SearchCars extends Command {
      *
      * @var string
      */
-     protected $searchstring1 = "https://www.cars.com/for-sale/searchresults.action?zc=85202&rd=99999&prMn=0&prMx=50000&yrId=27381&yrId=20201&yrId=20145&yrId=20200&yrId=20144&yrId=20199&mdId=20567&transTypeId=28112&mkId=20081&stkTypId=28881&sf1Nm=price&sf1Dir=DESC&sf2Nm=miles&sf2Dir=ASC&page=1&perPage=100&sortFeatures=buryUsedLowPrice&sortFeatures=buryNewLowPrice&sortFeatures=buryLowPriceOlderThanSix&sortFeatures=buryNoPrice&sortFeatures=buryUsedLowMileage&searchSource=GN_REFINEMENT";
-     protected $porsche911s = "https://www.cars.com/for-sale/searchresults.action?zc=85202&rd=99999&prMn=0&prMx=50000&yrId=27381&yrId=20201&yrId=20145&yrId=20200&yrId=20144&yrId=20199&mdId=20567&transTypeId=28112&mkId=20081&stkTypId=28881&sf1Nm=price&sf1Dir=DESC&sf2Nm=miles&sf2Dir=ASC&page=1&perPage=100&sortFeatures=buryUsedLowPrice&sortFeatures=buryNewLowPrice&sortFeatures=buryLowPriceOlderThanSix&sortFeatures=buryNoPrice&sortFeatures=buryUsedLowMileage&searchSource=UTILITY";
+    protected $searchstring1 = "https://www.cars.com/for-sale/searchresults.action?zc=85202&rd=99999&prMn=0&prMx=50000&yrId=27381&yrId=20201&yrId=20145&yrId=20200&yrId=20144&yrId=20199&mdId=20567&transTypeId=28112&mkId=20081&stkTypId=28881&sf1Nm=price&sf1Dir=DESC&sf2Nm=miles&sf2Dir=ASC&page=1&perPage=100&sortFeatures=buryUsedLowPrice&sortFeatures=buryNewLowPrice&sortFeatures=buryLowPriceOlderThanSix&sortFeatures=buryNoPrice&sortFeatures=buryUsedLowMileage&searchSource=GN_REFINEMENT";
+    protected $porsche911s = "https://www.cars.com/for-sale/searchresults.action?zc=85202&rd=99999&prMn=0&prMx=50000&yrId=27381&yrId=20201&yrId=20145&yrId=20200&yrId=20144&yrId=20199&mdId=20567&transTypeId=28112&mkId=20081&stkTypId=28881&sf1Nm=price&sf1Dir=DESC&sf2Nm=miles&sf2Dir=ASC&page=1&perPage=100&sortFeatures=buryUsedLowPrice&sortFeatures=buryNewLowPrice&sortFeatures=buryLowPriceOlderThanSix&sortFeatures=buryNoPrice&sortFeatures=buryUsedLowMileage&searchSource=UTILITY";
 
-     protected $caymans = "https://www.cars.com/for-sale/searchresults.action/?zc=85202&rd=99999&prMx=35000&mdId=20819&trId=24752&transTypeId=28112&mkId=20081&stkTypId=28881&sf1Nm=miles&sf1Dir=ASC&sf2Nm=price&sf2Dir=DESC&page=1&perPage=100&sortFeatures=buryUsedLowMileage&searchSource=GN_REFINEMENT&moveTo=listing-674982196";
+    protected $caymans = "https://www.cars.com/for-sale/searchresults.action/?zc=85202&rd=99999&prMx=35000&mdId=20819&trId=24752&transTypeId=28112&mkId=20081&stkTypId=28881&sf1Nm=miles&sf1Dir=ASC&sf2Nm=price&sf2Dir=DESC&page=1&perPage=100&sortFeatures=buryUsedLowMileage&searchSource=GN_REFINEMENT&moveTo=listing-674982196";
+
+    protected $e39 = "https://www.cars.com/for-sale/searchresults.action/?zc=85202&rd=99999&prMx=30000&yrId=20198&yrId=20142&yrId=20197&mdId=21396&mkId=20005&stkTypId=28881&sf1Nm=price&sf1Dir=DESC&sf2Nm=miles&sf2Dir=ASC&page=1&perPage=50&sortFeatures=buryUsedLowPrice&sortFeatures=buryNewLowPrice&sortFeatures=buryLowPriceOlderThanSix&sortFeatures=buryNoPrice&sortFeatures=buryUsedLowMileage&searchSource=GN_REFINEMENT";
+
     protected $description = 'Search and Store Interesting Cars for Sale';
+
 
     /**
      * Execute the console command.
@@ -42,6 +46,8 @@ class SearchCars extends Command {
         //$cars = $this->webdriver_test($this->searchstring1);
         if ($type == "911") {
           $cars = $this->webdriver_test($this->porsche911s);
+        } else if ($type == "e39") {
+          $cars = $this->webdriver_test($this->e39);
         } else {
           $cars = $this->webdriver_test($this->caymans);
         }
