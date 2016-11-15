@@ -31,7 +31,7 @@ class SearchCars extends Command {
 
     protected $e39 = "https://www.cars.com/for-sale/searchresults.action/?zc=85202&rd=99999&prMx=30000&yrId=20198&yrId=20142&yrId=20197&mdId=21396&mkId=20005&stkTypId=28881&sf1Nm=price&sf1Dir=DESC&sf2Nm=miles&sf2Dir=ASC&page=1&perPage=50&sortFeatures=buryUsedLowPrice&sortFeatures=buryNewLowPrice&sortFeatures=buryLowPriceOlderThanSix&sortFeatures=buryNoPrice&sortFeatures=buryUsedLowMileage&searchSource=GN_REFINEMENT";
 
-    protected $cayman_autotrader = "http://www.autotrader.com/cars-for-sale/cars+under+30000/Porsche/Cayman/Chicago+IL-60605?endYear=2017&firstRecord=0&makeCode1=POR&maxPrice=30000&mmt=%5BPOR%5BCAYMAN%5BCAYMAN%7CS%5D%5D%5B%5D%5D&modelCode1=CAYMAN&numRecords=100&searchRadius=0&showcaseListingId=435321114&showcaseOwnerId=9603808&sortBy=mileageASC&startYear=1981&transmissionCode=MAN&transmissionCodes=MAN&trim1=CAYMAN%7CS&Log=0";
+    protected $cayman_autotrader = "  http://www.autotrader.com/cars-for-sale/cars+under+30000/Porsche/Cayman/Chicago+IL-60605?endYear=2017&firstRecord=0&makeCode1=POR&maxPrice=30000&mmt=%5BPOR%5BCAYMAN%5BCAYMAN%7CS%5D%5D%5B%5D%5D&modelCode1=CAYMAN&numRecords=100&searchRadius=0&showcaseListingId=435321114&showcaseOwnerId=9603808&sortBy=mileageASC&startYear=1981&transmissionCode=MAN&transmissionCodes=MAN&trim1=CAYMAN%7CS&Log=0";
 
     protected $description = 'Search and Store Interesting Cars for Sale';
 
